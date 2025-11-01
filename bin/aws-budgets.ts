@@ -1,22 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
-import { S3BucketStack } from '../lib/S3BucketStack';
 
 const ENVIRONMENTS = ["STG", "PROD"] as const;
 type Environment = (typeof ENVIRONMENTS)[number];
 
-const validateEnvironment = (): Environment => {
-  const envKey = (new cdk.App().node.tryGetContext("environment") as Environment) || "STG";
-
-  if (!ENVIRONMENTS.includes(envKey)) {
-    throw new Error(
-      `Invalid environment specified. Please use one of the following: ${ENVIRONMENTS.join(", ")}.
-Example: cdk deploy -c environment=STG`
-    );
-  }
-  return envKey;
-};
-
-const environment = validateEnvironment();
 
 type AppEnv = "STG" | "PROD";
 
@@ -42,9 +28,3 @@ export const VARIABLES_CONFIG = (env: AppEnv) => {
 }
 
 const app = new cdk.App();
-new S3BucketStack(app, `S3BucketStack-${environment}`, {
-  variables: VARIABLES_CONFIG(environment),
-  env: {
-    region: 'ap-northeast-1'
-  },
-});
