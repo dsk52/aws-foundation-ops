@@ -12,7 +12,7 @@
   "schedule": [
     "every weekend"
   ],
-  "baseBranches": [
+  "baseBranchPatterns": [
     "main"
   ],
   "npm": {
