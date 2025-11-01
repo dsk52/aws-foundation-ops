@@ -138,3 +138,6 @@ dist
 
 # CDK
 cdk.out
+
+*.js
+*.d.ts
