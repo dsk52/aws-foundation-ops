@@ -1,14 +1,15 @@
 {
-  "name": "aws-fee",
+  "name": "aws-foundation-ops",
   "version": "0.1.0",
   "bin": {
-    "aws-fee": "bin/aws-fee.js"
+    "foundation-ops": "bin/foundation-ops.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "type:check": "tsc --noEmit",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "cdk:deploy": "cdk deploy"
   },
   "devDependencies": {
     "@types/node": "22.13.9",
