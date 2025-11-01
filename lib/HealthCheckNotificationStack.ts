@@ -30,6 +30,7 @@ export class HealthCheckNotificationStack extends Stack {
           type: 'HTTPS',
           fullyQualifiedDomainName: site.domain,
           resourcePath: site.path,
+          regions: ['ap-northeast-1', 'ap-southeast-1', 'us-west-2'], // NOTE: 3つ以上の指定が必要なため近所のリージョンにしている
           port: 443,
           failureThreshold: 3,
           requestInterval: 30,
