@@ -3,13 +3,17 @@ import { Construct } from 'constructs';
 
 import { CfnBudget } from 'aws-cdk-lib/aws-budgets';
 import { Topic } from 'aws-cdk-lib/aws-sns';
-import { ManagedPolicy, PolicyStatement, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { SlackChannelConfiguration } from 'aws-cdk-lib/aws-chatbot';
-import { SLACK } from '../constants/config';
+
+interface BudgetNotificationStackProps extends StackProps {
+  slackChannel: SlackChannelConfiguration;
+}
 
 export class BudgetNotificationStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: BudgetNotificationStackProps) {
     super(scope, id, props);
+    const { slackChannel } = props;
 
     const budgetTopic = new Topic(this, 'BudgetAlertTopic', {
       displayName: 'Budget Alert Notifications',
@@ -68,20 +72,6 @@ export class BudgetNotificationStack extends Stack {
       ]
     })
 
-    const chatbotRole = new Role(this, 'ChatbotRole', {
-      assumedBy: new ServicePrincipal('chatbot.amazonaws.com'),
-      managedPolicies: [
-        ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess'),
-        ManagedPolicy.fromAwsManagedPolicyName('CloudWatchReadOnlyAccess'),
-      ],
-    });
-
-    new SlackChannelConfiguration(this, 'SlackChannelConfig', {
-      slackChannelConfigurationName: 'BudgetAlertsChannel',
-      slackWorkspaceId: SLACK.workspaceId,
-      slackChannelId: SLACK.channelId,
-      notificationTopics: [budgetTopic],
-      role: chatbotRole,
-    });
+    slackChannel.addNotificationTopic(budgetTopic);
   }
 }

@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "type:check": "tsc --noEmit",
     "cdk": "cdk",
-    "cdk:deploy": "cdk deploy"
+    "cdk:deploy": "cdk deploy --all"
   },
   "devDependencies": {
     "@types/node": "22.13.9",
