@@ -141,3 +141,10 @@ cdk.out
 
 *.js
 *.d.ts
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform/terraform.tfvars
