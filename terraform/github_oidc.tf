@@ -33,7 +33,10 @@ resource "aws_iam_role" "about_deploy" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:dsk52/about:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:dsk52/about:ref:refs/heads/main",
+              "repo:dsk52/about:ref:refs/heads/master",
+            ]
           }
         }
       }
@@ -101,6 +104,7 @@ resource "aws_iam_role" "sandbox_go_function_github_actions" {
             "token.actions.githubusercontent.com:sub" = [
               "repo:dsk52/sandbox-go-function:*",
               "repo:dsk52/sandbox-go-function:ref:refs/heads/main",
+              "repo:dsk52/sandbox-go-function:ref:refs/heads/master",
             ]
           }
         }
