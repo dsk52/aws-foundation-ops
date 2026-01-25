@@ -5,7 +5,6 @@
     "github>dsk52/renovate-config:groupLinters",
     "github>dsk52/renovate-config:groupType",
     "group:nodeJs",
-    "group:aws-cdkMonorepo",
     ":configMigration"
   ],
   "schedule": [
@@ -16,5 +15,14 @@
   ],
   "npm": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchManagers": [
+        "terraform"
+      ],
+      "groupName": "terraform dependencies",
+      "groupSlug": "terraform"
+    }
+  ]
 }
