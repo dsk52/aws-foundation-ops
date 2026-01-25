@@ -25,3 +25,16 @@ terraform -chdir=terraform import aws_cloudwatch_metric_alarm.memo_drip memodrip
 
 terraform -chdir=terraform import aws_budgets_budget.monthly_cost 178083574992:MonthlyCostBudget
 ```
+
+## GitHub OIDC Imports
+
+```bash
+terraform -chdir=terraform import aws_iam_openid_connect_provider.github_actions arn:aws:iam::178083574992:oidc-provider/token.actions.githubusercontent.com
+
+terraform -chdir=terraform import aws_iam_role.about_deploy about-deploy
+terraform -chdir=terraform import aws_iam_role_policy.about_deploy about-deploy:about-deploy-policy
+
+terraform -chdir=terraform import aws_iam_role.sandbox_go_function_github_actions sandbox-go-function-github-actions-role
+terraform -chdir=terraform import aws_iam_policy.sandbox_go_function_github_actions_lambda_deploy arn:aws:iam::178083574992:policy/sandbox-go-function-github-actions-lambda-deploy
+terraform -chdir=terraform import aws_iam_role_policy_attachment.sandbox_go_function_github_actions_lambda_deploy sandbox-go-function-github-actions-role/arn:aws:iam::178083574992:policy/sandbox-go-function-github-actions-lambda-deploy
+```
