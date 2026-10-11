@@ -17,12 +17,24 @@
 
 ## Terraform運用
 
+Terraform CLIはCIと同じ **1.15.8** を使用します。CLIを更新する場合は、CIの `terraform_version` とこの記載を合わせて更新します。
+
 1. `terraform/terraform.tfvars.example` を `terraform/terraform.tfvars` にコピー
 2. `slack_team_id` と `slack_channel_id` を設定
 3. `terraform/dns.auto.tfvars.example` を `terraform/dns.auto.tfvars` にコピーし、既存DNSの検証値を設定（取得方法は [import手順](terraform/imports.md#route-53-dnsのimport) を参照）
 4. `terraform -chdir=terraform init`
 5. `terraform -chdir=terraform plan`
 6. 人間がplanを確認し、反映が必要なら `terraform -chdir=terraform apply`
+
+PRのCIは以下を実行します。ローカルでも同じコマンドで整形と構文を確認できます。
+
+```fish
+terraform -chdir=terraform fmt -check
+terraform -chdir=terraform init -backend=false -lockfile=readonly -input=false
+terraform -chdir=terraform validate
+```
+
+AWS上のリソースとの差分は、この検証とは別に `terraform plan` で確認します。
 
 ## DNS管理
 
