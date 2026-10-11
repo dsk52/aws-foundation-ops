@@ -13,3 +13,13 @@ variable "slack_channel_id" {
   type        = string
   description = "Slack channel ID for AWS Chatbot."
 }
+
+variable "route53_google_verification_record" {
+  type        = string
+  description = "Existing Google verification TXT value without the surrounding DNS double quotes."
+}
+
+variable "route53_acm_validation_target" {
+  type        = string
+  description = "Existing ACM validation CNAME target, including its trailing dot."
+}
