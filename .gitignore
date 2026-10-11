@@ -148,3 +148,5 @@ cdk.out
 *.tfstate.*
 crash.log
 terraform/terraform.tfvars
+terraform/dns.auto.tfvars
+*.tfplan

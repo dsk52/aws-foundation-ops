@@ -1,0 +1,2 @@
+route53_google_verification_record = "google-site-verification=REPLACE_WITH_EXISTING_VALUE"
+route53_acm_validation_target      = "REPLACE_WITH_EXISTING_TARGET.acm-validations.aws."
