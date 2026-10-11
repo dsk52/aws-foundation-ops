@@ -54,3 +54,31 @@ resource "aws_route53_record" "mealselect" {
   ttl     = 300
   records = ["104.198.14.52"]
 }
+
+resource "aws_route53_health_check" "blog_site" {
+  type              = "HTTPS"
+  fqdn              = "blog.daisukekonishi.com"
+  port              = 443
+  resource_path     = "/"
+  failure_threshold = 3
+  request_interval  = 30
+  regions           = ["ap-northeast-1", "ap-southeast-1", "us-west-2"]
+
+  tags = {
+    Name = "BlogSite"
+  }
+}
+
+resource "aws_route53_health_check" "memo_drip" {
+  type              = "HTTPS"
+  fqdn              = "memodrip.net"
+  port              = 443
+  resource_path     = "/"
+  failure_threshold = 3
+  request_interval  = 30
+  regions           = ["ap-northeast-1", "ap-southeast-1", "us-west-2"]
+
+  tags = {
+    Name = "MemoDrip"
+  }
+}
